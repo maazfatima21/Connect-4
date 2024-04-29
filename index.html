@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+  <!-- Link to the CSS file -->
+  <link rel="stylesheet" href="style.css">
+  <title>CONNECT 4</title>
+</head>
+
+
+<body>
+  <header class="header">
+    <!-- Logo -->
+    <button class="logo-link" id="logoLink" aria-label="Go to the Home page">
+      <img class="logo-img" src="img/logo.png"
+        alt="Logo, consisting of the word Connect and the number 4 in a yellow font on a red background circle">
+    </button>
+    <!-- Responsive menu open/close icons -->
+    <ul class="nav-toggle">
+      <li class="nav-toggle-item">
+        <button class="nav-toggle-btn active" id="navOpenBtn" aria-label="Open the navigation menu">
+          <svg class="nav-toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path class="nav-toggle-icon-path"
+              d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" />
+          </svg>
+        </button>
+      </li>
+      <li class="nav-toggle-item">
+        <button class="nav-toggle-btn" id="navCloseBtn" aria-label="Close the navigation menu">
+          <svg class="nav-toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+            <path class="nav-toggle-icon-path"
+              d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
+          </svg>
+        </button>
+      </li>
+    </ul>
+
+    <!-- Navigation menu -->
+    <nav class="nav" id="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><button class="nav-btn active" id="primarySettings">new game</button></li>
+        <li class="nav-item"><button class="nav-btn" id="primaryGame">play</button></li>
+        <li class="nav-item"><button class="nav-btn" id="primaryHelp">help</button></li>
+        <li class="nav-item"><button class="nav-btn" id="primaryLeaderboard">leaderboard</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="mainEl">
+    <h1 class="main-heading" id="mainHeading">welcome to <span class="main-heading-title">connect 4</span></h1>
+    <!-- Home page (New Game page) -->
+    <section class="section active" id="settings">
+      <h2 class="setting-heading" id="settingHeading">new game</h2>
+      <form>
+        <fieldset class="setting-fieldset">
+          <legend class="setting-legend">Player 1</legend>
+          <label class="setting-label" for="player1Type">
+            Computer
+            <input class="setting-checkbox" id="player1Type" type="checkbox" name="player1-type" checked>
+            <span class="setting-slider"></span>
+            Human
+          </label>
+          <label class="setting-label" for="player1Colour">
+            Yellow
+            <input class="setting-checkbox" id="player1Colour" type="checkbox" name="player1-colour" checked>
+            <span class="setting-slider colour"></span>
+            Red
+          </label>
+          <label class="setting-label" for="player1Name">What should I call Player 1?
+            <input class="setting-input" id="player1Name" type="text" name="player1-name" maxlength="10">
+          </label>
+        </fieldset>
+        <fieldset class="setting-fieldset">
+          <legend class="setting-legend">Player 2</legend>
+          <label class="setting-label" for="player2Type">
+            Computer
+            <input class="setting-checkbox" id="player2Type" type="checkbox" name="player2-type">
+            <span class="setting-slider"></span>
+            Human
+          </label>
+          <label class="setting-label" for="player2Colour">
+            Yellow
+            <input class="setting-checkbox" id="player2Colour" type="checkbox" name="player2-colour">
+            <span class="setting-slider colour"></span>
+            Red
+          </label>
+          <label class="setting-label" for="player2Name">What should I call Player 2?
+            <input class="setting-input" id="player2Name" type="text" name="player2-name" maxlength="10">
+          </label>
+        </fieldset>
+        <ul class="btns">
+          <li><button class="btn btn-primary" id="settingStartBtn">start</button></li>
+          <li><button class="btn" id="settingCloseBtn">close</button></li>
+        </ul>
+      </form>
+    </section>
+
+    <!-- Play page -->
+    <section class="section game" id="game">
+      <header class="board-header" id="gameHeader">
+        <h2 class="heading"><span class="current-player" id="currentPlayer"></span> Turn</h2>
+        <ul class="volume-btns" id="volumeBtns">
+          <li><button class="volume-btn active" id="soundBtn" aria-label="Turn on sound effects">
+              <svg class="volume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path class="volume-icon-path"
+                  d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zM461.64 256l45.64-45.64c6.3-6.3 6.3-16.52 0-22.82l-22.82-22.82c-6.3-6.3-16.52-6.3-22.82 0L416 210.36l-45.64-45.64c-6.3-6.3-16.52-6.3-22.82 0l-22.82 22.82c-6.3 6.3-6.3 16.52 0 22.82L370.36 256l-45.63 45.63c-6.3 6.3-6.3 16.52 0 22.82l22.82 22.82c6.3 6.3 16.52 6.3 22.82 0L416 301.64l45.64 45.64c6.3 6.3 16.52 6.3 22.82 0l22.82-22.82c6.3-6.3 6.3-16.52 0-22.82L461.64 256z" />
+              </svg>
+            </button></li>
+          <li><button class="volume-btn" id="muteBtn" aria-label="Turn off sound effects">
+              <svg class="volume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path class="volume-icon-path"
+                  d="M412.6 182c-10.28-8.334-25.41-6.867-33.75 3.402c-8.406 10.24-6.906 25.35 3.375 33.74C393.5 228.4 400 241.8 400 255.1c0 14.17-6.5 27.59-17.81 36.83c-10.28 8.396-11.78 23.5-3.375 33.74c4.719 5.806 11.62 8.802 18.56 8.802c5.344 0 10.75-1.779 15.19-5.399C435.1 311.5 448 284.6 448 255.1S435.1 200.4 412.6 182zM473.1 108.2c-10.22-8.334-25.34-6.898-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C476.6 172.1 496 213.3 496 255.1s-19.44 82.1-53.31 110.7c-10.25 8.396-11.75 23.5-3.344 33.74c4.75 5.775 11.62 8.771 18.56 8.771c5.375 0 10.75-1.779 15.22-5.431C518.2 366.9 544 313 544 255.1S518.2 145 473.1 108.2zM534.4 33.4c-10.22-8.334-25.34-6.867-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C559.9 116.3 592 183.9 592 255.1s-32.09 139.7-88.06 185.5c-10.25 8.396-11.75 23.5-3.344 33.74C505.3 481 512.2 484 519.2 484c5.375 0 10.75-1.779 15.22-5.431C601.5 423.6 640 342.5 640 255.1S601.5 88.34 534.4 33.4zM301.2 34.98c-11.5-5.181-25.01-3.076-34.43 5.29L131.8 160.1H48c-26.51 0-48 21.48-48 47.96v95.92c0 26.48 21.49 47.96 48 47.96h83.84l134.9 119.8C272.7 477 280.3 479.8 288 479.8c4.438 0 8.959-.9314 13.16-2.835C312.7 471.8 320 460.4 320 447.9V64.12C320 51.55 312.7 40.13 301.2 34.98z" />
+              </svg>
+            </button></li>
+        </ul>
+        <small class="game-tip">Tip: You can play with arrow keys.</small>
+      </header>
+
+      <!-- Game board will be injected using JS -->
+      <div class="board-grid" id="boardGrid"></div>
+      <p class="notification" id="noGameText">Please start a game by opening the NEW GAME page and clicking the START
+        button.</p>
+      <button class="btn btn-primary" id="noGameButton">Go to New Game</button>
+      <aside class="landscape-overlay">
+        <div class="alert-container">
+          <p class="alert-text">The whole board is not shown on the screen in landscape mode.</p>
+          <p class="alert-text">Please use portrait mode for the best experience.</p>
+          <button class="btn" id="landscapeOkBtn">OK</button>
+        </div>
+      </aside>
+    </section>
+    <section class="section help" id="help">
+      <h2 class="heading">help</h2>
+      <article class="help-article">
+        <h3 class="help-heading">objective</h3>
+        <p>To be the first player to connect 4 of your coloured discs in a line either vertically,
+          horizontally or diagonally.</p>
+      </article>
+      <article class="help-article">
+        <h3 class="help-heading">how to play</h3>
+        <ol class="help-rules">
+          <li>
+            Player1 plays first in the first game.
+            <br>Note: The player starting the current game will play second in the next game.
+          </li>
+          <li>Players will alternate turns after playing a disc.</li>
+          <li>On your turn, click the mouse on any of the columns which you want to place your disc into.</li>
+          <li>The disc will be dropped into the available lowest cell of your chosen column.</li>
+          <li>Play alternates until one player gets 4 discs of their colour in a line which can be horizontal, vertical
+            or diagonal.</li>
+          <li>The game can also end without a winner if there is a stalemate.</li>
+        </ol>
+      </article>
+      <article class="help-article">
+        <h3 class="help-heading">keyboard controls</h3>
+        <ul class="help-keys">
+          <li class="help-key-item">
+            <svg class="key-icon" aria-labelledby="arrowleft" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <title id="arrowleft">Left arrow key</title>
+              <path class="key-icon-path"
+                d="M384 32H64C28.66 32 0 60.66 0 96v320c0 35.34 28.66 64 64 64h320c35.34 0 64-28.66 64-64V96C448 60.66 419.3 32 384 32zM400 416c0 8.82-7.18 16-16 16H64c-8.82 0-16-7.18-16-16V96c0-8.82 7.18-16 16-16h320c8.82 0 16 7.18 16 16V416zM273.6 138c-8.719-3.812-18.91-2.094-25.91 4.375l-104 96C138.8 242.9 136 249.3 136 256s2.812 13.09 7.719 17.62l104 96c7 6.469 17.19 8.188 25.91 4.375C282.3 370.2 288 361.5 288 352V160C288 150.5 282.3 141.8 273.6 138z" />
+            </svg>
+            <p class="help-key-text">Move your coloured disc on top of the game board to the left.</p>
+          </li>
+          <li class="help-key-item">
+            <svg class="key-icon" aria-labelledby="arrowright" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <title id="arrowright">Right arrow key</title>
+              <path class="key-icon-path"
+                d="M200.3 142.4C193.3 135.9 183.1 134.2 174.4 138C165.7 141.8 160 150.5 160 159.1v192C160 361.5 165.7 370.2 174.4 374c8.719 3.812 18.91 2.094 25.91-4.375l104-96C309.2 269.1 312 262.7 312 256s-2.812-13.09-7.719-17.62L200.3 142.4zM384 32H64C28.66 32 0 60.66 0 96v320c0 35.34 28.66 64 64 64h320c35.34 0 64-28.66 64-64V96C448 60.66 419.3 32 384 32zM400 416c0 8.82-7.18 16-16 16H64c-8.82 0-16-7.18-16-16V96c0-8.82 7.18-16 16-16h320c8.82 0 16 7.18 16 16V416z" />
+            </svg>
+            <p class="help-key-text">Move your coloured disc on top of the game board to the right.</p>
+          </li>
+          <li class="help-key-item">
+            <svg class="key-icon" aria-labelledby="arrowdown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <title id="arrowdown">Down arrow key</title>
+              <path class="key-icon-path"
+                d="M320 192H128C118.5 192 109.8 197.7 105.1 206.4C102.2 215.1 103.9 225.3 110.4 232.3l96 104C210.9 341.2 217.3 344 224 344s13.09-2.812 17.62-7.719l96-104c6.469-7 8.188-17.19 4.375-25.91C338.2 197.7 329.5 192 320 192zM384 32H64C28.65 32 0 60.66 0 96v320c0 35.34 28.65 64 64 64h320c35.35 0 64-28.66 64-64V96C448 60.66 419.3 32 384 32zM400 416c0 8.82-7.178 16-16 16H64c-8.822 0-16-7.18-16-16V96c0-8.82 7.178-16 16-16h320c8.822 0 16 7.18 16 16V416z" />
+            </svg>
+            <p class="help-key-text">Drop your coloured disc in the targeted column.</p>
+          </li>
+        </ul>
+      </article>
+      <article class="help-article">
+        <h3 class="help-heading">points system</h3>
+        <p>Points are calculated by the number of a winner's moves deducted from 42 which is the total
+          number of cells.</p>
+        <p>For example, if a player wins with 4 moves, 42 - 4 = 38 points go to the winner.</p>
+      </article>
+      <article class="help-article">
+        <h3 class="help-heading">leaderboard</h3>
+        <p>This site uses local storage of the browser. The results of the games you play will be stored in your browser
+          local storage and the top 5 players will be shown on the leaderboard.</p>
+      </article>
+    </section>
+    </section>
+
+ <!-- Leaderboard page -->
+ <section class="section leaderboard" id="leaderboard">
+  <h2>leaderboard</h2>
+  <table class="leaderboard-table" id="leaderboardTable">
+    <thead class="leaderboard-table-head">
+      <tr>
+        <th>name</th>
+        <th>points</th>
+        <th>wins</th>
+        <th>win rate</th>
+      </tr>
+    </thead>
+    <tbody class="leaderboard-table-body" id="leaderboardTableBody"></tbody>
+  </table>
+  <p class="notification" id="noDataText">Unable to find save data.</p>
+  <button class="btn" id="leaderboardDeleteBtn">delete data</button>
+</section>
+<!-- Contact page -->
+<section class="section contact" id="contact">
+  <h2 class="heading">contact developer</h2>
+  <div class="contact-text">
+    <p>👋 Hi there!</p>
+    <p>My name is Sejung and I'm based in Dublin, Ireland.</p>
+    <p>I'm the developer of this website and currently learning full stack software development with Code Institute.
+    </p>
+    <p>I hope you have enjoyed playing my version of Connect Four!</p>
+    <p>If you would like to give me feedback about this project, send me a message using the contact form!</p>
+  </div>
+  <form class="contact-form" id="contactForm">
+    <p>All fields are required.</p>
+    <label class="contact-label" for="name">name</label>
+    <input id="name" type="text" required>
+    <label class="contact-label" for="email">email</label>
+    <input id="email" type="email" required>
+    <label class="contact-label" for="message">message</label>
+    <textarea class="contact-message" id="message" name="message" rows="5" minlength="10" required></textarea>
+    <button class="btn btn-primary" id="contactSendBtn" type="submit">send</button>
+  </form>
+</section>
+<!-- Success page -->
+<section class="section" id="success">
+  <svg class="feedback-icon" aria-labelledby="circle-check" xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512">
+    <title id="circle-check">Tick symbol in a circle</title>
+    <path class="feedback-icon-path"
+      d="M243.8 339.8C232.9 350.7 215.1 350.7 204.2 339.8L140.2 275.8C129.3 264.9 129.3 247.1 140.2 236.2C151.1 225.3 168.9 225.3 179.8 236.2L224 280.4L332.2 172.2C343.1 161.3 360.9 161.3 371.8 172.2C382.7 183.1 382.7 200.9 371.8 211.8L243.8 339.8zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z" />
+  </svg>
+  <h2>thank you!</h2>
+  <p class="feedback-text">Your message has been sent successfully.</p>
+  <p class="feedback-text">I will get back to you as soon as possible!</p>
+  <button class="btn btn-primary" id="successHomeBtn">go home</button>
+</section>
+<!-- Fail page -->
+<section class="section" id="fail">
+  <svg class="feedback-icon" aria-labelledby="triangle-exclamation" xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512">
+    <title id="triangle-exclamation">Exclamation mark in a triangle</title>
+    <path class="feedback-icon-path"
+      d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" />
+  </svg>
+  <h2>message not delivered</h2>
+  <p class="feedback-text">I'm sorry, but there was a problem delivering your message to the developer.</p>
+  <p class="feedback-text">Please try again!</p>
+  <button class="btn btn-primary" id="failContactBtn">go back</button>
+</section>
+</main>
+<footer class="footer">
+<ul class="footer-list">
+ 
+<script src="script.js"></script>
+
+<noscript>
+<div class="overlay">
+  <div class="alert-container">
+    <h1>JavaScript Required</h1>
+    <p>I'm sorry, but CONNECT 4 doesn't work without JavaScript enabled.</p>
+    <p>Please enable JavaScript and refresh the page if you wish to play.</p>
+  </div>
+</div>
+</noscript>
+</body>
+
+</html>
